@@ -1,4 +1,6 @@
-import com.sun.source.tree.BinaryTree;
+package hackerrank;
+
+import hackerrank.FindMedian;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

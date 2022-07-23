@@ -1,16 +1,27 @@
+package hackerrank;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PlusMinus {
-    public static Stream<BigDecimal> plusMinus(List<Integer> arr) {
+public class Solution {
+    /*
+     * Complete the 'plusMinus' function below.
+     *
+     * The function accepts INTEGER_ARRAY arr as parameter.
+     */
+
+    public static void plusMinus(List<Integer> arr) {
         // Write your code here
         Count count = new Count();
 
         arr.forEach(count::addBasedOnSign);
 
-        return count.distribution();
+        count
+                .distribution()
+                .forEach(System.out::println);
     }
 
     private static class Count {
@@ -28,13 +39,18 @@ public class PlusMinus {
             zero++;
         }
 
-        public Stream<BigDecimal> distribution() {
+        public List<BigDecimal> distribution() {
             BigDecimal sum = new BigDecimal(positive + negative + zero);
 
             return Stream
                     .of(positive, negative, zero)
                     .map(BigDecimal::new)
-                    .map(it -> it.divide(sum, 6, RoundingMode.HALF_UP));
+                    .map(it -> it.divide(sum, 6, RoundingMode.HALF_UP))
+                    .collect(Collectors.toList());
         }
+    }
+
+    public static void main(String[] args) {
+        plusMinus(List.of(-4, 3, -9, 0, 4, 1));
     }
 }
