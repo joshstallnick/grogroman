@@ -11,6 +11,8 @@ class BinaryTreeTest {
 
     val binaryTree = BinaryTree(items, Int::compareTo)
 
+    binaryTree.print()
+
     items.forEachIndexed { i, int ->
       Assertions.assertEquals(i, binaryTree.find(int))
     }

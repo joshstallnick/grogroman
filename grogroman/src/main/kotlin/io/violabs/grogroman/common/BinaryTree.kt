@@ -13,16 +13,21 @@ class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator
       return
     }
 
-    root!!.add(item, i, comparator)
+    root!!.add(1, item, i, comparator)
   }
 
   fun find(item: T): Int {
     return root?.find(item, comparator) ?: -1
   }
 
+  fun print() {
+    root?.print()
+  }
+
   private class Node<T>(
     var key: T? = null,
     var index: Int? = null,
+    var level: Int = 0,
     var left: Node<T>? = null,
     var right: Node<T>? = null
   ) {
@@ -36,27 +41,39 @@ class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator
       return right?.find(item, comparator) ?: -1
     }
 
-    fun add(item: T, index: Int, comparator: Comparator<T>) {
+    fun add(level: Int, item: T, index: Int, comparator: Comparator<T>) {
       if (key == null) {
         key = item
+        this.index = index
+        this.level = level
         return
       }
+
+      val nextLevel = level + 1
 
       val compared: Int = comparator.compare(key, item)
 
       if (compared == 1) {
-        if (left != null) return left!!.add(item, index, comparator)
+        if (left != null) return left!!.add(nextLevel, item, index, comparator)
 
-        left = Node(key = item, index = index)
+        left = Node(key = item, index = index, level = nextLevel)
         return
       }
 
       if (compared == -1) {
-        if (right != null) return right!!.add(item, index, comparator)
+        if (right != null) return right!!.add(nextLevel, item, index, comparator)
 
-        right = Node(key = item, index = index)
+        right = Node(key = item, index = index, level = nextLevel)
         return
       }
+    }
+
+    fun print() {
+      left?.print()
+
+      right?.print()
+
+      println("level: $level, index: $index, value: $key")
     }
   }
 }
