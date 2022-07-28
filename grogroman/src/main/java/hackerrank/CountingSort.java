@@ -8,6 +8,15 @@ import java.util.stream.IntStream;
 
 public class CountingSort {
 
+    /**
+     * Time complexity:
+     *
+     * 18. O(n)
+     *  1. 0(1) + O(1) + O(1)
+     *
+     * 26. O(m)
+     *  1. 0(1)
+     */
     public static List<Integer> run(List<Integer> input) {
         Map<Integer, Integer> countMap =
             input

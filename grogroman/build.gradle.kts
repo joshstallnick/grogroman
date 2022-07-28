@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.7.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.6.21"
+	kotlin("jvm") version "1.7.10"
 	kotlin("plugin.spring") version "1.6.21"
 }
 
@@ -19,6 +19,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

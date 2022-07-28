@@ -1,19 +1,21 @@
 package io.violabs.grogroman.common
 
-class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator<T>) {
-  private var root: Node<T>? = null
+data class BinaryTree<T>(val list: MutableList<T>, var root: Node<T>? = null, private val comparator: Comparator<T>) {
+
 
   init {
     list.forEachIndexed(this::add)
   }
 
-  private fun add(i: Int, item: T) {
+  fun add(i: Int, item: T) {
     if (root == null) {
       root = Node(item, i)
       return
     }
 
-    root!!.add(1, item, i, comparator)
+    val details = Node.Details(1, item, i, comparator)
+
+    root!!.add(details)
   }
 
   fun find(item: T): Int {
@@ -24,13 +26,20 @@ class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator
     root?.print()
   }
 
-  private class Node<T>(
+  data class Node<T>(
     var key: T? = null,
     var index: Int? = null,
     var level: Int = 0,
     var left: Node<T>? = null,
     var right: Node<T>? = null
   ) {
+
+    constructor(details: Details<T>) : this(
+      key = details.item,
+      index = details.index,
+      level = details.level
+    )
+
     fun find(item: T, comparator: Comparator<T>): Int {
       if (key == item) return index ?: -1
 
@@ -41,31 +50,27 @@ class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator
       return right?.find(item, comparator) ?: -1
     }
 
-    fun add(level: Int, item: T, index: Int, comparator: Comparator<T>) {
-      if (key == null) {
-        key = item
-        this.index = index
-        this.level = level
-        return
+    fun add(details: Details<T>) {
+      when (details.comparator.compare(key, details.item)) {
+        1  -> addLeft(details)
+        -1 -> addRight(details)
       }
+    }
 
-      val nextLevel = level + 1
+    private fun addLeft(details: Details<T>) {
+      val copy: Details<T> = details.copyWithNextLevel()
 
-      val compared: Int = comparator.compare(key, item)
+      if (left != null) return left!!.add(copy)
 
-      if (compared == 1) {
-        if (left != null) return left!!.add(nextLevel, item, index, comparator)
+      left = Node(details)
+    }
 
-        left = Node(key = item, index = index, level = nextLevel)
-        return
-      }
+    private fun addRight(details: Details<T>) {
+      val copy: Details<T> = details.copyWithNextLevel()
 
-      if (compared == -1) {
-        if (right != null) return right!!.add(nextLevel, item, index, comparator)
+      if (right != null) return right!!.add(copy)
 
-        right = Node(key = item, index = index, level = nextLevel)
-        return
-      }
+      right = Node(details)
     }
 
     fun print() {
@@ -74,6 +79,10 @@ class BinaryTree<T>(val list: MutableList<T>, private val comparator: Comparator
       right?.print()
 
       println("level: $level, index: $index, value: $key")
+    }
+
+    data class Details<T>(val level: Int, val item: T, val index: Int, val comparator: Comparator<T>) {
+      fun copyWithNextLevel(): Details<T> = this.copy(level = level + 1)
     }
   }
 }
