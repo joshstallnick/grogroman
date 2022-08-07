@@ -3,22 +3,29 @@ package io.violabs.grogroman.common
 import com.fasterxml.jackson.annotation.JsonIgnore
 
 open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null, private val comparator: Comparator<T>) {
-
+  var size: Int = 0
 
   init {
     initialList.forEachIndexed(::add)
   }
 
-  fun add(i: Int, item: T) {
+  private fun add(i: Int, item: T) {
     if (root == null) {
       root = Node(item, i)
+      size++
       return
     }
 
     val details = Node.Details(1, item, i, comparator)
 
     root!!.add(details)
+
+    size++
   }
+
+  fun add(item: T) = add(size, item)
+
+  private fun calculateSize() { this.size = root?.calculateSize() ?: 0 }
 
   fun findIndex(item: T): Int {
     return root?.findIndex(item, comparator) ?: -1
@@ -96,6 +103,14 @@ open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null,
       right?.print()
 
       println("level: $level, index: $index, value: $key")
+    }
+
+    fun calculateSize(): Int {
+      val leftSize = left?.calculateSize() ?: 0
+      val rightSize = right?.calculateSize() ?: 0
+      val thisSize = 1
+
+      return leftSize + rightSize + thisSize
     }
 
     @JsonIgnore
