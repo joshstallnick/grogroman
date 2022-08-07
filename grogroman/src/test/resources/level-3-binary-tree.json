@@ -1,0 +1,40 @@
+{
+  "list": [9, 7, 11, 6, 12, 8],
+  "root": {
+    "key": 9,
+    "index": 0,
+    "level": 0,
+    "left": {
+      "key": 7,
+      "index": 1,
+      "level": 1,
+      "left": {
+        "key": 6,
+        "index": 3,
+        "level": 2,
+        "left": null,
+        "right": null
+      },
+      "right": {
+        "key": 8,
+        "index": 5,
+        "level": 2,
+        "left": null,
+        "right": null
+      }
+    },
+    "right": {
+      "key": 11,
+      "index": 2,
+      "level": 1,
+      "left": null,
+      "right": {
+        "key": 12,
+        "index": 4,
+        "level": 2,
+        "left": null,
+        "right": null
+      }
+    }
+  }
+}

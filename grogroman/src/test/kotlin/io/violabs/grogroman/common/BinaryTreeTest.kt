@@ -54,9 +54,33 @@ class BinaryTreeTest {
   fun testBuildOfLevel2BinaryTree() {
     val file = File("./src/test/resources/level-2-binary-tree.json")
 
-    val expected = file.readLines().joinToString("", transform = String::trim).replace(" ", "")
+    val expected =
+      file
+        .readLines()
+        .joinToString("", transform = String::trim)
+        .replace(" ", "")
 
     val binaryTree = BinaryTree(mutableListOf(9, 7, 11), comparator = Int::compareTo)
+
+    val actual: String = objectMapper.writeValueAsString(binaryTree)
+
+    println("EXPECTED: $expected")
+    println("ACTUAL:   $actual")
+
+    Assertions.assertEquals(expected, actual)
+  }
+
+  @Test
+  fun testBuildOfLevel3BinaryTree() {
+    val file = File("./src/test/resources/level-3-binary-tree.json")
+
+    val expected =
+      file
+        .readLines()
+        .joinToString("", transform = String::trim)
+        .replace(" ", "")
+
+    val binaryTree = BinaryTree(mutableListOf(9, 7, 11, 6, 12, 8), comparator = Int::compareTo)
 
     val actual: String = objectMapper.writeValueAsString(binaryTree)
 
