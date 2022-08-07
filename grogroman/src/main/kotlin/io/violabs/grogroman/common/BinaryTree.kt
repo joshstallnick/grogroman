@@ -1,10 +1,12 @@
 package io.violabs.grogroman.common
 
-data class BinaryTree<T>(val list: MutableList<T>, var root: Node<T>? = null, private val comparator: Comparator<T>) {
+import com.fasterxml.jackson.annotation.JsonIgnore
+
+open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null, private val comparator: Comparator<T>) {
 
 
   init {
-    list.forEachIndexed(this::add)
+    initialList.forEachIndexed(::add)
   }
 
   fun add(i: Int, item: T) {
@@ -18,9 +20,14 @@ data class BinaryTree<T>(val list: MutableList<T>, var root: Node<T>? = null, pr
     root!!.add(details)
   }
 
-  fun find(item: T): Int {
-    return root?.find(item, comparator) ?: -1
+  fun findIndex(item: T): Int {
+    return root?.findIndex(item, comparator) ?: -1
   }
+
+  fun findNode(item: T): Node<T>? = root?.findNode(item, comparator)
+
+  @JsonIgnore
+  fun isLeaf(item: T): Boolean? = this.findNode(item)?.isLeaf()
 
   fun print() {
     root?.print()
@@ -40,14 +47,24 @@ data class BinaryTree<T>(val list: MutableList<T>, var root: Node<T>? = null, pr
       level = details.level
     )
 
-    fun find(item: T, comparator: Comparator<T>): Int {
+    fun findIndex(item: T, comparator: Comparator<T>): Int {
       if (key == item) return index ?: -1
 
       val compared: Int = comparator.compare(key, item)
 
-      if (compared == 1) return left?.find(item, comparator) ?: -1
+      if (compared == 1) return left?.findIndex(item, comparator) ?: -1
 
-      return right?.find(item, comparator) ?: -1
+      return right?.findIndex(item, comparator) ?: -1
+    }
+
+    fun findNode(item: T, comparator: Comparator<T>): Node<T>? {
+      if (key == item) return this
+
+      val compared: Int = comparator.compare(key, item)
+
+      if (compared == 1) return left?.findNode(item, comparator)
+
+      return right?.findNode(item, comparator)
     }
 
     fun add(details: Details<T>) {
@@ -80,6 +97,9 @@ data class BinaryTree<T>(val list: MutableList<T>, var root: Node<T>? = null, pr
 
       println("level: $level, index: $index, value: $key")
     }
+
+    @JsonIgnore
+    fun isLeaf(): Boolean = left == null && right == null
 
     data class Details<T>(val level: Int, val item: T, val index: Int, val comparator: Comparator<T>) {
       fun copyWithNextLevel(): Details<T> = this.copy(level = level + 1)

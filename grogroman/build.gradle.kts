@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.7.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("groovy")
 	kotlin("jvm") version "1.7.10"
 	kotlin("plugin.spring") version "1.6.21"
 }
@@ -23,6 +24,11 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// https://mvnrepository.com/artifact/org.spockframework/spock-spring
+	testImplementation("org.spockframework:spock-spring:2.2-M1-groovy-4.0")
+	// https://mvnrepository.com/artifact/org.spockframework/spock-core
+	testImplementation("org.spockframework:spock-core:2.2-M1-groovy-4.0")
 }
 
 tasks.withType<KotlinCompile> {
