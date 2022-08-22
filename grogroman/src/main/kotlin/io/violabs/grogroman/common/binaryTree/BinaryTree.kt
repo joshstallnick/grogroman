@@ -15,6 +15,9 @@ open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null,
 
   fun height(): Int = root?.height() ?: 0
 
+  fun leftHeight(): Int = root?.left?.height() ?: 0
+  fun rightHeight(): Int = root?.right?.height() ?: 0
+
   private fun add(i: Int, item: T) {
     if (root == null) {
       root = Node(item, i)

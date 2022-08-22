@@ -2,12 +2,14 @@ package io.violabs.grogroman.common.binaryTree
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.violabs.grogroman.common.t
+import kotlin.math.abs
 
 object BinarySearchExt {
   fun <T, B : BinaryTree<T>> isFullBinaryTree(tree: B): Boolean = tree.isFullBinaryTree()
   fun <T, B : BinaryTree<T>> isCompleteBinaryTree(tree: B): Boolean = tree.isCompleteBinaryTree()
 
   fun <T, B : BinaryTree<T>> isPerfectBinaryTree(tree: B): Boolean = tree.isPerfectBinaryTree()
+  fun <T, B : BinaryTree<T>> isBalancedBinaryTree(tree: B): Boolean = tree.isBalancedBinaryTree()
 }
 
 //region findIndex
@@ -73,5 +75,11 @@ fun <T> BinaryTree.Node<T>.isCompletelyFull(): Boolean =
 fun <T> BinaryTree<T>.isPerfectBinaryTree(): Boolean =
   BinaryTreeCalculator.maxNodesAtHeight(this.height() + 1) == this.size
 
-
 //endregion isPerfectBinaryTree
+
+//region isBalancedBinaryTree
+
+fun <T> BinaryTree<T>.isBalancedBinaryTree(): Boolean =
+  (this.leftHeight() - this.rightHeight()).toDouble().let(::abs) <= 1
+
+//endregion isBalancedBinaryTree
