@@ -10,6 +10,7 @@ object BinarySearchExt {
 
   fun <T, B : BinaryTree<T>> isPerfectBinaryTree(tree: B): Boolean = tree.isPerfectBinaryTree()
   fun <T, B : BinaryTree<T>> isBalancedBinaryTree(tree: B): Boolean = tree.isBalancedBinaryTree()
+  fun <T, B : BinaryTree<T>> isDegenerateBinaryTree(tree: B): Boolean = tree.isDegenerateBinaryTree()
 }
 
 //region findIndex
@@ -50,10 +51,10 @@ fun <T> BinaryTree.Node<T>.isLeaf(): Boolean = left == null && right == null
 fun <T> BinaryTree<T>.isFullBinaryTree(): Boolean = this.root?.isFullBinaryTree().t()
 
 fun <T> BinaryTree.Node<T>.isFullBinaryTree(): Boolean {
-  return this.isLeaf() || this.isFull()
+  return this.isLeaf() || this.isFullRecursive()
 }
 
-fun <T> BinaryTree.Node<T>.isFull(): Boolean =
+fun <T> BinaryTree.Node<T>.isFullRecursive(): Boolean =
   left?.isFullBinaryTree().t() and right?.isFullBinaryTree().t()
 //endregion isFullBinaryTree
 
@@ -83,3 +84,15 @@ fun <T> BinaryTree<T>.isBalancedBinaryTree(): Boolean =
   (this.leftHeight() - this.rightHeight()).toDouble().let(::abs) <= 1
 
 //endregion isBalancedBinaryTree
+
+//region isDegenerate|isPathological
+fun <T> BinaryTree<T>.isDegenerateBinaryTree(): Boolean = root?.isDegenerate().t()
+
+fun <T> BinaryTree<T>.isPathological(): Boolean = this.isDegenerateBinaryTree()
+
+fun <T> BinaryTree.Node<T>.isDegenerate(): Boolean {
+  return this.isLeaf() || (!hasTwoChildren() && (left?.isDegenerate().t() || right?.isDegenerate().t()))
+}
+
+fun <T> BinaryTree.Node<T>.hasTwoChildren(): Boolean = left != null && right != null
+//endregion isDegenerate|isPathological
