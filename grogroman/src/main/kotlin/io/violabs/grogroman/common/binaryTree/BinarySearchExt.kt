@@ -3,8 +3,9 @@ package io.violabs.grogroman.common.binaryTree
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.violabs.grogroman.common.t
 
-object SearchExt {
+object BinarySearchExt {
   fun <T, B : BinaryTree<T>> isFullBinaryTree(tree: B): Boolean = tree.isFullBinaryTree()
+  fun <T, B : BinaryTree<T>> isCompleteBinaryTree(tree: B): Boolean = tree.isCompleteBinaryTree()
 }
 
 //region findIndex
@@ -41,15 +42,26 @@ fun <T> BinaryTree<T>.isLeaf(item: T): Boolean? = this.findNode(item)?.isLeaf()
 fun <T> BinaryTree.Node<T>.isLeaf(): Boolean = left == null && right == null
 //endregion isLeaf
 
-//region
+//region isFullBinaryTree
 fun <T> BinaryTree<T>.isFullBinaryTree(): Boolean =  this.root?.isFullBinaryTree().t()
 
 fun <T> BinaryTree.Node<T>.isFullBinaryTree(): Boolean {
-  return this.isLeaf() || this.isCompletelyFull()
+  return this.isLeaf() || this.isFull()
+}
+
+fun <T> BinaryTree.Node<T>.isFull(): Boolean =
+  left?.isFullBinaryTree().t() and right?.isFullBinaryTree().t()
+//endregion isFullBinaryTree
+
+//region isCompleteBinaryTree
+
+fun <T> BinaryTree<T>.isCompleteBinaryTree(): Boolean =  this.root?.isFullBinaryTree().t()
+
+fun <T> BinaryTree.Node<T>.isCompleteBinaryTree(): Boolean {
+  return this.isLeaf() || this.left?.isLeaf().t() || this.isCompletelyFull()
 }
 
 fun <T> BinaryTree.Node<T>.isCompletelyFull(): Boolean =
-  left?.isFullBinaryTree().t() and right?.isFullBinaryTree().t()
+  left?.isCompleteBinaryTree().t() && right?.isCompleteBinaryTree().t()
 
-fun <T> BinaryTree.Node<T>.isFull(): Boolean = left != null && right != null
-//endregion
+//endregion isCompleteBinaryTree
