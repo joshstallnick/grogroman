@@ -13,10 +13,12 @@ open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null,
     root?.print()
   }
 
-  fun height(): Int = root?.height() ?: 0
+  fun height(): Int = root?.height()?.plus(1) ?: 0
 
-  fun leftHeight(): Int = root?.left?.height() ?: 0
-  fun rightHeight(): Int = root?.right?.height() ?: 0
+  fun leftHeight(): Int = root?.left?.height()?.plus(1) ?: 0
+  fun rightHeight(): Int = root?.right?.height()?.plus(1) ?: 0
+
+  fun diameter(): Int = leftHeight() + rightHeight() - 1
 
   private fun add(i: Int, item: T) {
     if (root == null) {

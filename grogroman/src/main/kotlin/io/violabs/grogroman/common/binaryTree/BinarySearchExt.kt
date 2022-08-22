@@ -76,7 +76,7 @@ fun <T> BinaryTree.Node<T>.isCompletelyFull(): Boolean =
 //region isPerfectBinaryTree
 
 fun <T> BinaryTree<T>.isPerfectBinaryTree(): Boolean =
-  BinaryTreeCalculator.maxNodesAtHeight(this.height() + 1) == this.size
+  BinaryTreeCalculator.maxNodesAtHeight(this.height()) == this.size
 
 //endregion isPerfectBinaryTree
 
