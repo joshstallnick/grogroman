@@ -4,22 +4,22 @@ import io.violabs.grogroman.common.binaryTree.BinarySearchExt
 import io.violabs.grogroman.common.binaryTree.IntBinaryTree
 import spock.lang.Specification
 
-class BinaryTreeSearchDegenerateSpec extends Specification {
-  def 'isDegenerateBinaryTree is correct'() {
+class BinaryTreeSearchLeftSkewedSpec extends Specification {
+  def 'isLeftSkewedBinaryTree is correct'() {
     given:
     //       18
     //     15
-    //      16
-    //        17
-    def numbers = [18, 15, 16, 17]
+    //   14
+    //  8
+    def numbers = [18, 15, 14, 8]
 
     def binaryTree = new IntBinaryTree(numbers)
 
     expect:
-    BinarySearchExt.INSTANCE.isDegenerateBinaryTree(binaryTree)
+    BinarySearchExt.INSTANCE.isLeftSkewedBinaryTree(binaryTree)
   }
 
-  def 'isDegenerateBinaryTree fails if complete binary tree'() {
+  def 'isLeftSkewedBinaryTree fails if complete binary tree'() {
     given:
     //       18
     //   15      30
@@ -29,6 +29,6 @@ class BinaryTreeSearchDegenerateSpec extends Specification {
     def binaryTree = new IntBinaryTree(numbers)
 
     expect:
-    !BinarySearchExt.INSTANCE.isDegenerateBinaryTree(binaryTree)
+    !BinarySearchExt.INSTANCE.isLeftSkewedBinaryTree(binaryTree)
   }
 }

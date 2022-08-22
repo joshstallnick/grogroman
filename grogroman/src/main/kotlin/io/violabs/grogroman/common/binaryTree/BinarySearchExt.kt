@@ -11,6 +11,8 @@ object BinarySearchExt {
   fun <T, B : BinaryTree<T>> isPerfectBinaryTree(tree: B): Boolean = tree.isPerfectBinaryTree()
   fun <T, B : BinaryTree<T>> isBalancedBinaryTree(tree: B): Boolean = tree.isBalancedBinaryTree()
   fun <T, B : BinaryTree<T>> isDegenerateBinaryTree(tree: B): Boolean = tree.isDegenerateBinaryTree()
+  fun <T, B : BinaryTree<T>> isLeftSkewedBinaryTree(tree: B): Boolean = tree.isLeftSkewed()
+  fun <T, B : BinaryTree<T>> isRightSkewedBinaryTree(tree: B): Boolean = tree.isRightSkewed()
 }
 
 //region findIndex
@@ -96,3 +98,19 @@ fun <T> BinaryTree.Node<T>.isDegenerate(): Boolean {
 
 fun <T> BinaryTree.Node<T>.hasTwoChildren(): Boolean = left != null && right != null
 //endregion isDegenerate|isPathological
+
+//region isLeftSkewed
+fun <T> BinaryTree<T>.isLeftSkewed(): Boolean = root?.isLeftSkewed().t()
+
+fun <T> BinaryTree.Node<T>.isLeftSkewed(): Boolean {
+  return this.isLeaf() || (left?.isLeftSkewed().t() && right == null)
+}
+//endregion isLeftSkewed
+
+//region isRightSkewed
+fun <T> BinaryTree<T>.isRightSkewed(): Boolean = root?.isRightSkewed().t()
+
+fun <T> BinaryTree.Node<T>.isRightSkewed(): Boolean {
+  return this.isLeaf() || (right?.isRightSkewed().t() && left == null)
+}
+//endregion isRightSkewed
