@@ -1,23 +1,28 @@
 {
   "root": {
-    "key": 9,
+    "key": 18,
     "index": 0,
     "level": 0,
     "left": {
-      "key": 7,
+      "key": 40,
       "index": 1,
       "level": 1,
       "left": null,
       "right": null
     },
     "right": {
-      "key": 11,
+      "key": 30,
       "index": 2,
       "level": 1,
       "left": null,
-      "right": null
+      "right": {
+        "key": 45,
+        "index": 6,
+        "level": 2,
+        "left": null,
+        "right": null
+      }
     }
   },
-  "comparator": {},
-  "size": 3
+  "size": 4
 }

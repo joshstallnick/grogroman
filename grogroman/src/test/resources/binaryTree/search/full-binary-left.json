@@ -1,0 +1,46 @@
+{
+  "root": {
+    "key": 18,
+    "index": 0,
+    "level": 0,
+    "left": {
+      "key": 15,
+      "index": 1,
+      "level": 1,
+      "left": {
+        "key": 40,
+        "index": 3,
+        "level": 2,
+        "left": {
+          "key": 30,
+          "index": 5,
+          "level": 2,
+          "left": null,
+          "right": null
+        },
+        "right": {
+          "key": 100,
+          "index": 6,
+          "level": 2,
+          "left": null,
+          "right": null
+        }
+      },
+      "right": {
+        "key": 50,
+        "index": 4,
+        "level": 2,
+        "left": null,
+        "right": null
+      }
+    },
+    "right": {
+      "key": 20,
+      "index": 2,
+      "level": 1,
+      "left": null,
+      "right": null
+    }
+  },
+  "size": 7
+}

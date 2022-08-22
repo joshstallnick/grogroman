@@ -1,4 +1,4 @@
-package io.violabs.grogoman.common
+package io.violabs.grogoman.common.binaryTree
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.violabs.grogroman.common.binaryTree.IntBinaryTree
