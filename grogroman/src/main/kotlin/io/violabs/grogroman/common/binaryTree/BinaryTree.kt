@@ -13,6 +13,8 @@ open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null,
     root?.print()
   }
 
+  fun height(): Int = root?.height() ?: 0
+
   private fun add(i: Int, item: T) {
     if (root == null) {
       root = Node(item, i)
@@ -80,6 +82,17 @@ open class BinaryTree<T>(initialList: MutableList<T>, var root: Node<T>? = null,
       val thisSize = 1
 
       return leftSize + rightSize + thisSize
+    }
+
+    fun height(): Int {
+      val leftLowest = left?.height() ?: level
+      val rightLowest = right?.height() ?: level
+
+      if (level >= leftLowest && level >= rightLowest) return level
+
+      if (leftLowest > rightLowest) return leftLowest
+
+      return rightLowest
     }
 
     data class Details<T>(val level: Int, val item: T, val index: Int, val comparator: Comparator<T>) {

@@ -6,6 +6,8 @@ import io.violabs.grogroman.common.t
 object BinarySearchExt {
   fun <T, B : BinaryTree<T>> isFullBinaryTree(tree: B): Boolean = tree.isFullBinaryTree()
   fun <T, B : BinaryTree<T>> isCompleteBinaryTree(tree: B): Boolean = tree.isCompleteBinaryTree()
+
+  fun <T, B : BinaryTree<T>> isPerfectBinaryTree(tree: B): Boolean = tree.isPerfectBinaryTree()
 }
 
 //region findIndex
@@ -43,7 +45,7 @@ fun <T> BinaryTree.Node<T>.isLeaf(): Boolean = left == null && right == null
 //endregion isLeaf
 
 //region isFullBinaryTree
-fun <T> BinaryTree<T>.isFullBinaryTree(): Boolean =  this.root?.isFullBinaryTree().t()
+fun <T> BinaryTree<T>.isFullBinaryTree(): Boolean = this.root?.isFullBinaryTree().t()
 
 fun <T> BinaryTree.Node<T>.isFullBinaryTree(): Boolean {
   return this.isLeaf() || this.isFull()
@@ -55,7 +57,7 @@ fun <T> BinaryTree.Node<T>.isFull(): Boolean =
 
 //region isCompleteBinaryTree
 
-fun <T> BinaryTree<T>.isCompleteBinaryTree(): Boolean =  this.root?.isFullBinaryTree().t()
+fun <T> BinaryTree<T>.isCompleteBinaryTree(): Boolean = this.root?.isFullBinaryTree().t()
 
 fun <T> BinaryTree.Node<T>.isCompleteBinaryTree(): Boolean {
   return this.isLeaf() || this.left?.isLeaf().t() || this.isCompletelyFull()
@@ -65,3 +67,11 @@ fun <T> BinaryTree.Node<T>.isCompletelyFull(): Boolean =
   left?.isCompleteBinaryTree().t() && right?.isCompleteBinaryTree().t()
 
 //endregion isCompleteBinaryTree
+
+//region isPerfectBinaryTree
+
+fun <T> BinaryTree<T>.isPerfectBinaryTree(): Boolean =
+  BinaryTreeCalculator.maxNodesAtHeight(this.height() + 1) == this.size
+
+
+//endregion isPerfectBinaryTree
