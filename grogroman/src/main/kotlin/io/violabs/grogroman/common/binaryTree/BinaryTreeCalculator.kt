@@ -1,5 +1,6 @@
 package io.violabs.grogroman.common.binaryTree
 
+import io.violabs.grogroman.common.not
 import kotlin.math.*
 
 fun Int.ifPositive(calculate: (Int) -> Double): Int = this.ifAbove(-1, calculate)
@@ -34,4 +35,6 @@ object BinaryTreeCalculator {
   fun numberOfEdgesByNodeAmount(amount: Int): Int = amount.ifAbove(0) { it - 1.0 }
 
   fun numberOfNodesByEdgeAmount(amount: Int): Int = amount.ifAbove(0) { it + 1.0 }
+
+  fun numberOfLabelledTrees(numberOfUnlabelled: Int, numberOfNodes: Int): Int = numberOfUnlabelled * !numberOfNodes
 }

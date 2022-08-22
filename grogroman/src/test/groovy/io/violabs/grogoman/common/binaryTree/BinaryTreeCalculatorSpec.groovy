@@ -149,4 +149,12 @@ class BinaryTreeCalculatorSpec extends Specification {
      4     | 5
      8     | 9
   }
+
+  def numberOfLabelledTrees() {
+    when:
+    int actual = BinaryTreeCalculator.INSTANCE.numberOfLabelledTrees(5, 3)
+
+    then:
+    30 == actual
+  }
 }
