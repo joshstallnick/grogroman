@@ -11,7 +11,7 @@ class PlusMinusTest {
     //given
     val numbers = arrayOf(-4, 3, -9, 0, 4, 1)
 
-    val expected: Array<Double> = arrayOf(
+    val expected: List<Double> = listOf(
       0.500000,
       0.333333,
       0.166667
