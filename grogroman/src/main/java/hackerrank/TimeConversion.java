@@ -1,9 +1,7 @@
 package hackerrank;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 
 public class TimeConversion {
 
