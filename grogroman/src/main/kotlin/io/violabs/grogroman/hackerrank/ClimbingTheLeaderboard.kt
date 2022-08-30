@@ -1,4 +1,4 @@
-package io.violabs.grogroman
+package io.violabs.grogroman.hackerrank
 
 object ClimbingTheLeaderboard {
 

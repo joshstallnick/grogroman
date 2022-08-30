@@ -1,4 +1,4 @@
-package io.violabs.grogroman
+package io.violabs.grogroman.hackerrank
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
