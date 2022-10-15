@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class NumberLineJumpsTest : TestHarness() {
 
   @Test
-  fun runTest1() = test<String> {
+  fun runTest1() = test {
     given { "NO" }
 
     whenever { NumberLineJumps.run(0, 2, 5, 3) }
