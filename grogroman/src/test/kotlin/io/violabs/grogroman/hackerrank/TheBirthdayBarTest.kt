@@ -7,7 +7,7 @@ class TheBirthdayBarTest : TestHarness() {
 
     @Test
     fun runTest1() = test {
-        given { 2 }
+        expect { 2 }
 
         whenever {
             TheBirthdayBar.run(
@@ -20,7 +20,7 @@ class TheBirthdayBarTest : TestHarness() {
 
     @Test
     fun runTest2() = test {
-        given { 0 }
+        expect { 0 }
 
         whenever {
             TheBirthdayBar.run(
@@ -33,7 +33,7 @@ class TheBirthdayBarTest : TestHarness() {
 
     @Test
     fun runTest3() = test {
-        given { 1 }
+        expect { 1 }
 
         whenever {
             TheBirthdayBar.run(

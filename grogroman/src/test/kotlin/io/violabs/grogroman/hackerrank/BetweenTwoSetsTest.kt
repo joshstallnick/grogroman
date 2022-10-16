@@ -7,7 +7,7 @@ class BetweenTwoSetsTest : TestHarness() {
 
   @Test
   fun runTest1() = test {
-    given { 3 }
+    expect { 3 }
 
     whenever {
       BetweenTwoSets.run(

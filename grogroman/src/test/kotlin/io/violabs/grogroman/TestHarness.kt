@@ -27,7 +27,7 @@ abstract class TestHarness {
     var actual: T? = null
     var equalsChecked = false
 
-    fun given(expectedSupplier: () -> T) {
+    fun expect(expectedSupplier: () -> T) {
       expected = expectedSupplier()
     }
 

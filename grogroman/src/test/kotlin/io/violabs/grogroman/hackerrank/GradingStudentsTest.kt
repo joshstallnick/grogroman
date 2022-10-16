@@ -7,7 +7,7 @@ class GradingStudentsTest : TestHarness() {
 
   @Test
   fun testRun() = testArray {
-    given { arrayOf(75, 67, 40, 33) }
+    expect { arrayOf(75, 67, 40, 33) }
 
     whenever {
       val input = arrayOf(73, 67, 38, 33)

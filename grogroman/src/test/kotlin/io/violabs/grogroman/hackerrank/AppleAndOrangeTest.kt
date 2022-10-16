@@ -13,7 +13,7 @@ class AppleAndOrangeTest : TestHarness() {
 
   @Test
   fun testRun1() = test {
-    given { Pair(1, 1) }
+    expect { Pair(1, 1) }
 
     whenever {
       val parameters = AppleAndOrange.Parameters(
@@ -31,7 +31,7 @@ class AppleAndOrangeTest : TestHarness() {
 
   @Test
   fun testRun2() = test {
-    given { Pair(0, 0) }
+    expect { Pair(0, 0) }
 
     whenever {
       val parameters = AppleAndOrange.Parameters(
@@ -49,7 +49,7 @@ class AppleAndOrangeTest : TestHarness() {
 
   @Test
   fun testRun3() = test {
-    given { Pair(18_409, 19_582) }
+    expect { Pair(18_409, 19_582) }
 
     whenever {
       val apples: List<Int> = applesArrayStringLocation.extractNumberList()
